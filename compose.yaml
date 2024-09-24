@@ -11,4 +11,5 @@ services:
       - /app/node_modules
     environment:
       - NODE_ENV=development
+      - CHOKIDAR_USEPOLLING=true
     command: npm start
