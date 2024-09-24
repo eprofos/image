@@ -8,7 +8,7 @@ const ImageImport = ({ onImageLoad }) => {
     reader.onload = (event) => {
       const img = new Image();
       img.onload = () => {
-        onImageLoad(img);
+        onImageLoad(img, img.width, img.height);
       };
       img.src = event.target.result;
     };

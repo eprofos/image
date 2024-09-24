@@ -16,10 +16,14 @@ function App() {
   const [color, setColor] = useState('#000000');
   const [fontSize, setFontSize] = useState(16);
   const [thickness, setThickness] = useState(2);
+  const [originalWidth, setOriginalWidth] = useState(0);
+  const [originalHeight, setOriginalHeight] = useState(0);
   const stageRef = useRef(null);
 
-  const handleImageLoad = useCallback((img) => {
+  const handleImageLoad = useCallback((img, width, height) => {
     setImage(img);
+    setOriginalWidth(width);
+    setOriginalHeight(height);
   }, []);
 
   const handleAnnotationAdd = useCallback((annotation) => {
@@ -76,19 +80,24 @@ function App() {
             canUndo={annotationHistory.length > 0}
             hasImage={!!image}
           />
-          <DownloadButton stageRef={stageRef} isImageLoaded={!!image} />
+          <DownloadButton 
+            stageRef={stageRef} 
+            isImageLoaded={!!image} 
+            originalWidth={originalWidth}
+            originalHeight={originalHeight}
+          />
         </div>
         <div className="canvas-container">
           {image && (
             <Stage
-              {...getScaledDimensions(image.width, image.height)}
+              {...getScaledDimensions(originalWidth, originalHeight)}
               ref={stageRef}
             >
               <Layer>
                 <Image
                   image={image}
-                  width={getScaledDimensions(image.width, image.height).width}
-                  height={getScaledDimensions(image.width, image.height).height}
+                  width={getScaledDimensions(originalWidth, originalHeight).width}
+                  height={getScaledDimensions(originalWidth, originalHeight).height}
                 />
                 {annotations.map((annotation, i) => {
                   if (annotation.type === 'text') {
