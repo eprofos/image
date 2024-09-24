@@ -74,6 +74,7 @@ function App() {
             setThickness={setThickness}
             onUndo={handleUndo}
             canUndo={annotationHistory.length > 0}
+            hasImage={!!image}
           />
           <DownloadButton stageRef={stageRef} isImageLoaded={!!image} />
         </div>

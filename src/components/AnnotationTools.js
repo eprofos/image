@@ -10,7 +10,8 @@ const AnnotationTools = ({
   thickness, 
   setThickness,
   onUndo,
-  canUndo
+  canUndo,
+  hasImage
 }) => {
   return (
     <div className="annotation-tools">
@@ -18,29 +19,33 @@ const AnnotationTools = ({
         <button
           className={`tool-button ${selectedTool === 'text' ? 'active' : ''}`}
           onClick={() => setSelectedTool('text')}
+          disabled={!hasImage}
         >
           Text
         </button>
         <button
           className={`tool-button ${selectedTool === 'arrow' ? 'active' : ''}`}
           onClick={() => setSelectedTool('arrow')}
+          disabled={!hasImage}
         >
           Arrow
         </button>
         <button
           className={`tool-button ${selectedTool === 'rectangle' ? 'active' : ''}`}
           onClick={() => setSelectedTool('rectangle')}
+          disabled={!hasImage}
         >
           Rectangle
         </button>
-        <button
-          className="tool-button"
-          onClick={onUndo}
-          disabled={!canUndo}
-          title={canUndo ? "Undo last annotation" : "No annotations to undo"}
-        >
-          Undo
-        </button>
+        {canUndo && (
+          <button
+            className="tool-button"
+            onClick={onUndo}
+            title="Undo last annotation"
+          >
+            Undo
+          </button>
+        )}
       </div>
       <div className="tool-options">
         <label>
@@ -50,6 +55,7 @@ const AnnotationTools = ({
             value={color}
             onChange={(e) => setColor(e.target.value)}
             title="Choose color"
+            disabled={!hasImage}
           />
         </label>
         {selectedTool === 'text' && (
@@ -62,6 +68,7 @@ const AnnotationTools = ({
               min="8"
               max="72"
               title="Font size"
+              disabled={!hasImage}
             />
           </label>
         )}
@@ -75,6 +82,7 @@ const AnnotationTools = ({
               min="1"
               max="20"
               title="Line thickness"
+              disabled={!hasImage}
             />
           </label>
         )}
