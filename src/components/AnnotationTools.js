@@ -12,9 +12,6 @@ const AnnotationTools = ({
   onUndo,
   canUndo
 }) => {
-  console.log('AnnotationTools rendered. Selected tool:', selectedTool);
-  console.log('Thickness:', thickness);
-
   return (
     <div className="annotation-tools">
       <div className="tool-buttons">
