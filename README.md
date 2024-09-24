@@ -37,7 +37,7 @@ Before you begin, ensure you have the following installed on your system:
 
 2. Start the production environment:
    ```
-   docker compose -f compose.yaml -f compose.prod.yaml up --build -d
+   docker compose -f compose.prod.yaml up --build -d
    ```
 
    This will build the Docker image optimized for production and start the container. The application will be available at `http://localhost:80`.
@@ -51,7 +51,7 @@ Before you begin, ensure you have the following installed on your system:
 
 - For production:
   ```
-  docker compose -f compose.yaml -f compose.prod.yaml up -d
+  docker compose -f compose.prod.yaml up -d
   ```
 
 To stop and remove the containers, networks, and volumes associated with this application:
@@ -60,7 +60,7 @@ docker compose down
 ```
 or
 ```
-docker compose -f compose.yaml -f compose.prod.yaml down
+docker compose -f compose.prod.yaml down
 ```
 
 ## Additional Information
